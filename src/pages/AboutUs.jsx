@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Image from "../assets/image5.png";
+import Image from "../assets/Image5.png";
 
 const AboutUs = () => {
   const [visible, setVisible] = useState(false);
