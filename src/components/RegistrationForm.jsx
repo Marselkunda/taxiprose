@@ -29,7 +29,9 @@
 //     }
 //   }, [error, submitted]);
 
-//   const isOnlyLetters = (value) => /^[a-zA-Z\s]*$/.test(value);
+//   // Loosened regex to allow letters, spaces, hyphens, apostrophes for names/companies/city
+//   const isValidText = (value) => /^[a-zA-Z\s'-]*$/.test(value);
+//   // Only numbers for number fields
 //   const isOnlyNumbers = (value) => /^[0-9]*$/.test(value);
 
 //   const handleChange = (e) => {
@@ -37,13 +39,15 @@
 
 //     if (
 //       ["firstName", "surname", "companyName", "city"].includes(name) &&
-//       !isOnlyLetters(value)
-//     ) return;
+//       !isValidText(value)
+//     )
+//       return;
 
 //     if (
 //       ["organizationNumber", "postalNumber", "tel"].includes(name) &&
 //       !isOnlyNumbers(value)
-//     ) return;
+//     )
+//       return;
 
 //     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
 //   };
@@ -58,14 +62,18 @@
 //     }
 
 //     try {
-//       // Normalize email and send acceptTerms as "true"
 //       const payload = {
 //         ...form,
 //         email: form.email.toLowerCase(),
-//         acceptTerms: "true",
+//         acceptTerms: "true", // backend expects string "true"
 //       };
 
-//       await axios.post("http://localhost:5000/api/register", payload);
+//       const apiBaseUrl =
+//         import.meta.env.VITE_API_BASE_URL || "https://taxipro-psi.vercel.app";
+
+//         // http://localhost:5000
+
+//       await axios.post(`${apiBaseUrl}/api/register`, payload);
 
 //       setSubmitted(true);
 //       setError("");
@@ -87,8 +95,12 @@
 //       });
 //     } catch (err) {
 //       console.error(err);
+//       console.log("Error response data:", err.response?.data); // added debug
+
 //       if (err.response?.data?.errors) {
 //         setError(err.response.data.errors[0].msg || "Invalid input.");
+//       } else if (err.response?.data?.message) {
+//         setError(err.response.data.message);
 //       } else {
 //         setError("Submission failed. Try again.");
 //       }
@@ -107,7 +119,6 @@
 //             height: 0;
 //             width: 0;
 //           }
-
 //           .custom-checkbox {
 //             display: inline-block;
 //             width: 20px;
@@ -119,12 +130,10 @@
 //             transition: border-color 0.3s ease, background-color 0.3s ease;
 //             flex-shrink: 0;
 //           }
-
 //           input[type="checkbox"]:checked + .custom-checkbox {
 //             background-color: #ffc001;
 //             border-color: #ffc001;
 //           }
-
 //           .custom-checkbox svg {
 //             position: absolute;
 //             top: 2px;
@@ -138,7 +147,6 @@
 //             opacity: 0;
 //             transition: opacity 0.2s ease;
 //           }
-
 //           input[type="checkbox"]:checked + .custom-checkbox svg {
 //             opacity: 1;
 //           }
@@ -264,6 +272,7 @@
 //                 name="acceptTerms"
 //                 checked={form.acceptTerms}
 //                 onChange={handleChange}
+//                 required
 //               />
 //               <span className="custom-checkbox ml-2">
 //                 <svg viewBox="0 0 24 24" fill="none">
@@ -318,8 +327,6 @@
 
 // export default RegistrationForm;
 
-
-
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
@@ -343,6 +350,7 @@ const RegistrationForm = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [termsError, setTermsError] = useState("");
   const messageRef = useRef(null);
 
   useEffect(() => {
@@ -351,9 +359,7 @@ const RegistrationForm = () => {
     }
   }, [error, submitted]);
 
-  // Loosened regex to allow letters, spaces, hyphens, apostrophes for names/companies/city
   const isValidText = (value) => /^[a-zA-Z\s'-]*$/.test(value);
-  // Only numbers for number fields
   const isOnlyNumbers = (value) => /^[0-9]*$/.test(value);
 
   const handleChange = (e) => {
@@ -372,13 +378,19 @@ const RegistrationForm = () => {
       return;
 
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+
+    // Clear terms error immediately if they check the box
+    if (name === "acceptTerms" && checked) {
+      setTermsError("");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!form.acceptTerms) {
-      setError("You must accept the terms to register.");
+      setTermsError("You must accept the terms to register.");
+      setError("");
       setSubmitted(false);
       return;
     }
@@ -387,18 +399,17 @@ const RegistrationForm = () => {
       const payload = {
         ...form,
         email: form.email.toLowerCase(),
-        acceptTerms: "true", // backend expects string "true"
+        acceptTerms: "true",
       };
 
       const apiBaseUrl =
         import.meta.env.VITE_API_BASE_URL || "https://taxipro-psi.vercel.app";
 
-        // http://localhost:5000
-
       await axios.post(`${apiBaseUrl}/api/register`, payload);
 
       setSubmitted(true);
       setError("");
+      setTermsError("");
       setForm({
         firstName: "",
         surname: "",
@@ -417,8 +428,6 @@ const RegistrationForm = () => {
       });
     } catch (err) {
       console.error(err);
-      console.log("Error response data:", err.response?.data); // added debug
-
       if (err.response?.data?.errors) {
         setError(err.response.data.errors[0].msg || "Invalid input.");
       } else if (err.response?.data?.message) {
@@ -479,10 +488,7 @@ const RegistrationForm = () => {
         className="w-full max-w-[1600px] bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl p-6 sm:p-10 border"
         style={{ borderColor: "#ffc001" }}
       >
-        <h1
-          className="text-3xl font-bold text-center mb-2"
-          style={{ color: "#ffc001" }}
-        >
+        <h1 className="text-3xl font-bold text-center mb-2" style={{ color: "#ffc001" }}>
           Register for TaxiPro
         </h1>
         <p className="text-center text-gray-600 mb-6 text-sm sm:text-base">
@@ -587,14 +593,13 @@ const RegistrationForm = () => {
             />
           </div>
 
-          <div className="lg:col-span-3 flex items-center gap-3">
+          <div className="lg:col-span-3 flex flex-col gap-1">
             <label className="inline-flex items-center cursor-pointer select-none text-sm text-gray-800">
               <input
                 type="checkbox"
                 name="acceptTerms"
                 checked={form.acceptTerms}
                 onChange={handleChange}
-                required
               />
               <span className="custom-checkbox ml-2">
                 <svg viewBox="0 0 24 24" fill="none">
@@ -605,6 +610,9 @@ const RegistrationForm = () => {
                 I accept Taxi Pro i Sverige AB's terms and privacy policy *
               </span>
             </label>
+            {termsError && (
+              <p className="text-sm text-red-600">{termsError}</p>
+            )}
           </div>
 
           <div className="lg:col-span-3 flex items-center gap-3">
