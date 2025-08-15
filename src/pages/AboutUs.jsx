@@ -30,7 +30,7 @@ const AboutUs = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl font-extrabold mb-12 tracking-wide mt-10 text-left" style={{ color: "#ffc001" }}>
-              About TaxiPro
+             Om oss
               <span className="block h-1 w-24 rounded-full mt-4" style={{ backgroundColor: "#ffc001" }}></span>
             </h1>
 

@@ -13,19 +13,9 @@ const HeroSection = ({ scrollToPricing, scrollToServices }) => {
           transition={{ duration: 0.8 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-snug sm:leading-tight"
         >
-          Empowering Your{" "}
-          <span className="text-[#ffc001]">Taxi Business</span>
+          Allt för din taxiverksamhet{" "}
+          <span className="text-[#ffc001]">i en digital plattform</span>
         </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-base sm:text-lg md:text-xl text-gray-700 mb-8 max-w-xl mx-auto lg:mx-0"
-        >
-          Manage your fleet, track drivers, and increase efficiency with our
-          all-in-one taxi dispatch system.
-        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -38,13 +28,13 @@ const HeroSection = ({ scrollToPricing, scrollToServices }) => {
             className="text-white px-6 py-3 rounded-lg text-base md:text-lg font-semibold shadow-md transition-all duration-300"
             style={{ backgroundColor: "#ffc001" }}
           >
-            Get Started
+           Kom igång
           </button>
           <button
             onClick={scrollToServices}
             className="bg-white border border-gray-300 text-gray-800 px-6 py-3 rounded-lg text-base md:text-lg font-semibold hover:bg-gray-100 transition-all duration-300"
           >
-            Learn More
+            Utforska mer
           </button>
         </motion.div>
       </div>

@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import ServiceCards from "../components/ServiceCards";
 import PricingSection from "../components/PricingSection";
-import PromoBanner from "../components/PromoBanner";
+// import PromoBanner from "../components/PromoBanner";
 import AppDownloadSection from "../components/AppDownloadSection";
 import RegistrationForm from "../components/RegistrationForm";
 import Footer from "../components/Footer";
@@ -50,7 +50,7 @@ const Home = () => {
       <div ref={servicesRef}>
         <ServiceCards />
       </div>
-      <PromoBanner scrollToPricing={scrollToPricing} />
+      {/* <PromoBanner scrollToPricing={scrollToPricing} /> */}
       <div ref={pricingRef}>
         <PricingSection scrollToRegister={scrollToRegister} />
       </div>

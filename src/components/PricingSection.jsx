@@ -5,47 +5,43 @@ const [selectedPlan, setSelectedPlan] = useState(null);
 
   const plans = [
     {
-      name: "Basic",
-      price: "$29/mo",
-      description: "Ideal for individual drivers or small teams",
+      name: "TaxiPro S",
+      price: "0 kr/mån",
+      description: "För enskilda förare och mindre åkerier",
       features: [
-        "Up to 50 bookings",
-        "1 admin account",
-        "Limited reports",
-        "Email support",
+        "Upp till 1 bil",
+        "Upp till 2 anställda"
+
       ],
     },
     {
-      name: "Standard",
-      price: "$59/mo",
-      description: "Best for growing taxi businesses",
+      name: "TaxiPro M",
+      price: "499 / Månad",
+      description: "För åkerier som växer och behöver mer kapacitet",
       features: [
-        "Up to 200 bookings",
-        "3 admin accounts",
-        "Advanced analytics",
-        "Priority support",
+        "Upp till 5 bilar",
+        "Upp till 8 anställda"
+        
       ],
     },
     {
-      name: "Professional",
-      price: "$99/mo",
-      description: "Perfect for large fleets and enterprise use",
+      name: "TaxiPro L",
+      price: "999 / Månad",
+      description: "För större flottor med höga krav",
       features: [
-        "Unlimited bookings",
-        "Unlimited admins",
-        "Custom reports",
-        "Dedicated support",
+        "Upp till 10 bilar",
+        "Upp till 15 anställda"
+
       ],
     },
     {
-      name: "Premium",
-      price: "$149/mo",
-      description: "For high-performance teams and automation",
+      name: "Obegränsad",
+      price: "1499 / Månad",
+      description: "För total frihet och obegränsad kapacitet",
       features: [
-        "Everything in Professional",
-        "AI Dispatching",
-        "Multi-branch management",
-        "24/7 dedicated support",
+        "Obegränsat antal bilar",
+        "Obegränsat antal anställda"
+        
       ],
     },
   ];
@@ -53,11 +49,11 @@ const [selectedPlan, setSelectedPlan] = useState(null);
   return (
     <section className="bg-white py-12 px-4 sm:px-6 lg:px-16">
       <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-          Choose Your Plan
+        <h2 className="text-3xl sm:text-4xl font-bold text-[#ffc001]">
+          Välj ditt TaxiPro-paket
         </h2>
         <p className="text-gray-500 mt-4 text-base sm:text-lg">
-          Flexible pricing for your taxi management system
+          Anpassa TaxiPro efter ditt åkeris behov
         </p>
       </div>
 

@@ -489,10 +489,10 @@ const RegistrationForm = () => {
         style={{ borderColor: "#ffc001" }}
       >
         <h1 className="text-3xl font-bold text-center mb-2" style={{ color: "#ffc001" }}>
-          Register for TaxiPro
+          Registrera ditt åkeri
         </h1>
         <p className="text-center text-gray-600 mb-6 text-sm sm:text-base">
-          Get access to the TaxiPro Management System
+          Få full tillgång till TaxiPros webbapp för administration av ditt åkeri
         </p>
 
         {error && (
@@ -518,15 +518,15 @@ const RegistrationForm = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {[
-            ["First Name", "firstName"],
-            ["Surname", "surname"],
-            ["Company name", "companyName"],
-            ["Organization number", "organizationNumber"],
-            ["Address", "address"],
-            ["Postal number", "postalNumber"],
-            ["City", "city"],
-            ["Tel", "tel"],
-            ["E-mail", "email"],
+            ["Förnamn", "firstName"],
+            ["Efternamn", "surname"],
+            ["Företagsnamn", "companyName"],
+            ["Organisationsnummer", "organizationNumber"],
+            ["Adress", "address"],
+            ["Postnummer", "postalNumber"],
+            ["Ort", "city"],
+            ["Telefon", "tel"],
+            ["E-post", "email"],
           ].map(([label, name]) => (
             <div key={name} className="flex flex-col">
               <label className="text-sm font-medium text-gray-700 mb-1">
@@ -538,7 +538,7 @@ const RegistrationForm = () => {
                 value={form[name]}
                 onChange={handleChange}
                 required
-                placeholder={`Enter ${label.toLowerCase()}`}
+                placeholder={`Ange ${label.toLowerCase()}`}
                 className="p-3 text-sm rounded-md border border-gray-300 bg-white focus:ring-2 outline-none appearance-none focus:ring-[#ffc001]"
                 autoComplete="off"
                 spellCheck="false"
@@ -548,7 +548,7 @@ const RegistrationForm = () => {
 
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-700 mb-1">
-              Membership Type
+              Paket
             </label>
             <select
               name="membershipType"
@@ -556,16 +556,16 @@ const RegistrationForm = () => {
               onChange={handleChange}
               className="p-3 text-sm rounded-md border border-gray-300 bg-white focus:ring-2 outline-none appearance-none focus:ring-[#ffc001]"
             >
-              <option>basic</option>
-              <option>standard</option>
-              <option>professional</option>
-              <option>premium</option>
+              <option>TaxiPro S</option>
+              <option>TaxiPro M </option>
+              <option>TaxiPro L </option>
+              <option>Obegränsad</option>
             </select>
           </div>
 
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-700 mb-1">
-              Payment Method
+              Betalningsmetod
             </label>
             <select
               name="paymentMethod"
@@ -573,14 +573,14 @@ const RegistrationForm = () => {
               onChange={handleChange}
               className="p-3 text-sm rounded-md border border-gray-300 bg-white focus:ring-2 outline-none appearance-none focus:ring-[#ffc001]"
             >
-              <option>Quarterly invoice (5% discount)</option>
-              <option>Half-yearly invoice (10% discount)</option>
+              <option>Kvartalsfaktura (5 % rabatt)</option>
+              <option>Halvårsfaktura (10% rabatt)</option>
             </select>
           </div>
 
           <div className="lg:col-span-3">
             <label className="text-sm font-medium text-gray-700 mb-1">
-              Comment or message
+              Meddelande
             </label>
             <textarea
               name="message"
@@ -588,7 +588,7 @@ const RegistrationForm = () => {
               onChange={handleChange}
               rows="4"
               className="w-full p-3 text-sm rounded-md border border-gray-300 bg-white focus:ring-2 outline-none appearance-none focus:ring-[#ffc001]"
-              placeholder="Write a message..."
+              placeholder="Skriv ett meddelande..."
               spellCheck="false"
             />
           </div>
@@ -607,7 +607,7 @@ const RegistrationForm = () => {
                 </svg>
               </span>
               <span className="ml-3">
-                I accept Taxi Pro i Sverige AB's terms and privacy policy *
+              Jag har tagit del av och godkänner Taxi Pro i Sverige AB:s allmänna villkor och integritetspolicy
               </span>
             </label>
             {termsError && (
@@ -629,7 +629,7 @@ const RegistrationForm = () => {
                 </svg>
               </span>
               <span className="ml-3">
-                I would like to receive newsletters via email
+              Jag vill ta emot nyhetsbrev från Taxi Pro i Sverige AB och kan när som helst avregistrera mig via länk i utskicket eller genom att kontakta info@taxipro.se.
               </span>
             </label>
           </div>
@@ -646,7 +646,7 @@ const RegistrationForm = () => {
               onMouseOver={(e) => (e.target.style.backgroundColor = "#e6ac00")}
               onMouseOut={(e) => (e.target.style.backgroundColor = "#ffc001")}
             >
-              Submit Registration
+              Skicka
             </button>
           </div>
         </form>

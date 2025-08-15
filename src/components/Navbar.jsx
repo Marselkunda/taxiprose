@@ -44,21 +44,21 @@ function Navbar({ onSignUpClick }) {
             onClick={closeMenu}
             className={({ isActive }) => `${linkBaseClass} ${isActive ? activeClass : inactiveClass}`}
           >
-            Home
+           Hem
           </NavLink>
           <NavLink
             to="/AboutUs"
             onClick={closeMenu}
             className={({ isActive }) => `${linkBaseClass} ${isActive ? activeClass : inactiveClass}`}
           >
-            About
+           Om oss
           </NavLink>
           <NavLink
             to="/Services"
             onClick={closeMenu}
             className={({ isActive }) => `${linkBaseClass} ${isActive ? activeClass : inactiveClass}`}
           >
-            Services
+            Tjänster
           </NavLink>
           <NavLink
             to="/signin"

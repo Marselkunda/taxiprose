@@ -9,10 +9,10 @@ const AppDownloadSection = () => {
         {/* Left: Text + Buttons */}
         <div className="flex-1 text-center lg:text-left">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ffc001] mb-4 leading-snug">
-            Ride Smarter with TaxiPro App
+            Arbeta smartare med TaxiPro Förarapp
           </h2>
           <p className="text-base sm:text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
-            Book a ride in seconds, get real-time driver updates, and pay with ease – all from one powerful app.
+            Publicera annonser och hitta åkare, hantera körpassrapporter och chatta med förare i hela Sverige – allt samlat i en kraftfull app för taxibranschen
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

@@ -19,8 +19,8 @@ const Footer = () => {
           <div>
             <h2 className="text-3xl font-bold text-gray-800">TaxiPro</h2>
             <p className="mt-3 max-w-xs text-gray-700">
-              Smart Taxi Management made simple.<br />
-              Designed for operators in Sweden and beyond.
+              Smart hantering av taxiverksamhet<br />
+              enkelt och effektivt. Utvecklad för åkerier och förare i Sverige.
             </p>
             <div className="flex space-x-4 mt-5 text-2xl">
               <a href="#" className="text-gray-600 hover:text-[#ffc001] transition">
@@ -37,31 +37,31 @@ const Footer = () => {
 
           {/* Products Column */}
           <div>
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Products</h3>
+            <h3 className="text-xl font-semibold mb-3 text-gray-800">Produkter</h3>
             <ul className="space-y-2">
-              <li><Link to="#" className="text-gray-600 hover:text-[#ffc001] transition">Taxi Booking</Link></li>
-              <li><Link to="#" className="text-gray-600 hover:text-[#ffc001] transition">Driver Management</Link></li>
-              <li><Link to="#" className="text-gray-600 hover:text-[#ffc001] transition">Fleet Tracking</Link></li>
+              <li><Link to="#" className="text-gray-600 hover:text-[#ffc001] transition">Åkarie-webbapp</Link></li>
+              <li><Link to="#" className="text-gray-600 hover:text-[#ffc001] transition">Förar-mobilapp</Link></li>
+              {/* <li><Link to="#" className="text-gray-600 hover:text-[#ffc001] transition">Fleet Tracking</Link></li> */}
             </ul>
           </div>
 
           {/* Quick Links Column */}
           <div>
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Quick Links</h3>
+            <h3 className="text-xl font-semibold mb-3 text-gray-800">Snabblänkar</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-gray-600 hover:text-[#ffc001] transition">
-                  Home
+                  Hem
                 </Link>
               </li>
               <li>
                 <Link to="/AboutUs" className="text-gray-600 hover:text-[#ffc001] transition">
-                  About us
+                  Om oss
                 </Link>
               </li>
               <li>
                 <Link to="/services" className="text-gray-600 hover:text-[#ffc001] transition">
-                  Services
+                  Tjänster
                 </Link>
               </li>
               <li>
@@ -70,7 +70,7 @@ const Footer = () => {
                   onClick={handleRegisterClick}
                   className="text-gray-600 hover:text-[#ffc001] transition cursor-pointer"
                 >
-                  Register
+                  Registrera
                 </a>
               </li>
             </ul>
@@ -78,11 +78,17 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Contact Us</h3>
+            <h3 className="text-xl font-semibold mb-3 text-gray-800">Kontakta oss</h3>
             <ul className="space-y-2 text-gray-700">
-              <li>Iraq, Erbil</li>
-              <li>info@taxipro.se</li>
-              <li>+46 123 456 789</li>
+              {/* <li>Sweden</li> */}
+              {/* <li>info@taxipro.se</li> */}
+              <li>
+              <a href="mailto:info@taxipro.se" className="text-gray-600 hover:text-[#ffc001] transition">
+                  info@taxipro.se
+                </a>
+              </li>
+
+              {/* <li>+46 123 456 789</li> */}
             </ul>
           </div>
         </div>

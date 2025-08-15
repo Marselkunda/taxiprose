@@ -34,11 +34,11 @@ const ServiceCards = () => {
   return (
     <section className="py-20 bg-white px-6 sm:px-10 lg:px-20">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-          A System Designed for Every User
+        <h2 className="text-3xl sm:text-4xl font-bold text-[#ffc001] mb-4">
+          En modern plattform som förenar hela taxibranschen
         </h2>
         <p className="text-gray-600 text-lg mb-12">
-          Our taxi system includes everything your business needs to operate smoothly.
+         och samla fordon, förare, rapporter, och rekrytering i ett och samma digitala system.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
