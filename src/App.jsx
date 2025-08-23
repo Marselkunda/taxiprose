@@ -7,6 +7,8 @@ import AboutUs from './pages/AboutUs';
 import Services from './pages/Services';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/Services" element={<Services/>}/>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/termsconditions" element={<TermsConditions />} />
       </Routes>
     </>
   );

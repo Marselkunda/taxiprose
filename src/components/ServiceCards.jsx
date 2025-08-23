@@ -1,299 +1,473 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+// import React, { useRef, useEffect, useState } from "react";
 
-// Import your images from the assets folder
-import Image4 from "../assets/Image4.png";
-import Image5 from "../assets/Image3.png";
-import Image6 from "../assets/Image6.png";
+// import Image4 from "../assets/Picture1.png";
+// import Image5 from "../assets/Picture2.png";
+// import Image6 from "../assets/Picture3.png";
+// import Image7 from "../assets/Picture4.png";
+// import Image8 from "../assets/Picture5.png";
+// import Image9 from "../assets/Picture6.png";
 
-// Card data with imported images
+// const cards = [
+//   { title: "Bil", description: "Lägg till dina bilar och få full insyn i status, kostnader och lönsamhet – följ besiktningar, tillgänglighet och jämför vinster mellan biltyper och perioder.", image: Image4 },
+//   { title: "Anställda", description: "Administrera alla förare enkelt med full kontroll över lönearter, bilkopplingar, arbetspass och kontaktuppgifter – samt ladda ner lönespecifikationer för valfri period, samlat och strukturerat i ett system.", image: Image5 },
+//   { title: "Anställdas Rapporter ", description: "Lägg till dina intäkter och låt systemet automatiskt skapa rapporter, löner och lönespecifikation. Alla siffror förs över till fordonsrapporten och kan sökas fram, laddas ner och sparas i systemet .", image: Image6 },
+//   { title: "Anställdas Rapporter", description: "Följ varje fordons kostnader, intäkter, vinst och marginaler i realtid – siffrorna hämtas automatiskt från anställdas rapporter eller kan läggas in manuellt. Rapporter kan laddas ner för revisorn och sparas i systemet .", image: Image7 },
+//   { title: "Arbetsgivarintyg", description: "Följ varje fordons kostnader, intäkter, vinst och marginaler i realtid – siffrorna hämtas automatiskt från anställdas rapporter eller kan läggas in manuellt. Rapporter kan laddas ner för revisorn och sparas i systemet .", image: Image8 },
+//   { title: "Annonsplattform", description: "Annonsera efter förare för fasta eller tidsbegränsade uppdrag – och hitta förare som aktivt söker jobb. Du kan även lägga upp fordon till försäljning.", image: Image9 },
+// ];
+
+// const ServiceCards = () => {
+//   const scrollRef = useRef(null);
+//   const [activeCard, setActiveCard] = useState(null);
+//   const [imageOpen, setImageOpen] = useState(false);
+//   const slideIntervalRef = useRef(null);
+//   const isHoveredRef = useRef(false);
+
+//   const extendedCards = [...cards, ...cards]; // duplicate for seamless looping
+
+//   // Auto sliding
+//   useEffect(() => {
+//     const scrollContainer = scrollRef.current;
+//     if (!scrollContainer) return;
+
+//     const cardWidth = 320 + 24; // base card width + gap
+//     let scrollAmount = 0;
+
+//     const startSliding = () => {
+//       slideIntervalRef.current = setInterval(() => {
+//         if (!isHoveredRef.current && activeCard === null && !imageOpen) {
+//           scrollAmount += cardWidth;
+
+//           scrollContainer.scrollTo({
+//             left: scrollAmount,
+//             behavior: "smooth",
+//           });
+
+//           // seamless reset
+//           if (scrollAmount >= scrollContainer.scrollWidth / 2) {
+//             scrollAmount = 0;
+//             scrollContainer.scrollTo({ left: 0, behavior: "auto" });
+//           }
+//         }
+//       }, 3000);
+//     };
+
+//     startSliding();
+//     return () => clearInterval(slideIntervalRef.current);
+//   }, [activeCard, imageOpen]);
+
+//   // Close zoom/fullscreen on outside click
+//   useEffect(() => {
+//     const handleClickOutside = () => {
+//       if (imageOpen) setImageOpen(false);
+//       else if (activeCard !== null) setActiveCard(null);
+//     };
+//     document.addEventListener("click", handleClickOutside);
+//     return () => document.removeEventListener("click", handleClickOutside);
+//   }, [activeCard, imageOpen]);
+
+//   const handleCardClick = (index) => {
+//     const scrollContainer = scrollRef.current;
+//     if (scrollContainer) {
+//       const card = scrollContainer.children[index];
+//       const containerCenter = scrollContainer.offsetWidth / 2;
+//       const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+//       scrollContainer.scrollTo({ left: cardCenter - containerCenter, behavior: "smooth" });
+//     }
+//     setActiveCard(activeCard === index ? null : index);
+//   };
+
+//   const handleImageClick = (index) => {
+//     if (activeCard !== index) {
+//       handleCardClick(index);
+//       setTimeout(() => setImageOpen(true), 300);
+//     } else {
+//       setImageOpen(true);
+//     }
+//   };
+
+//   return (
+//     <section className="py-20 px-4 sm:px-6 lg:px-20">
+//       {/* Heading */}
+//       <div className="text-center mb-12">
+//         <h2 className="text-3xl sm:text-4xl font-bold text-[#ffc001] mb-4">
+//           En modern plattform som förenar hela taxibranschen
+//         </h2>
+//         <p className="text-gray-600 text-lg">
+//           Samlar fordon, förare, rapporter och rekrytering i ett och samma digitala system
+//         </p>
+//       </div>
+
+//       {/* Slider */}
+//       <div
+//         ref={scrollRef}
+//         onMouseEnter={() => (isHoveredRef.current = true)}
+//         onMouseLeave={() => (isHoveredRef.current = false)}
+//         className="flex flex-row gap-6 overflow-x-auto snap-x snap-mandatory pb-12 pt-12 scrollbar-hide"
+//         style={{ paddingLeft: "20px", paddingRight: "20px", scrollbarWidth: "none", msOverflowStyle: "none" }}
+//       >
+//         {extendedCards.map((card, index) => (
+//           <div
+//             key={index}
+//             onClick={(e) => { e.stopPropagation(); handleCardClick(index); }}
+//             className={`flex-shrink-0 w-[80vw] sm:w-[320px] bg-white rounded-xl shadow-lg overflow-hidden snap-start cursor-pointer
+//               transform transition-all duration-700 ease-in-out
+//               ${activeCard === index
+//                 ? "sm:scale-125 sm:z-30 sm:shadow-2xl w-[90vw] mx-auto" // Mobile: full width with margins
+//                 : "hover:scale-105 hover:z-10"
+//               }`}
+//           >
+//             <img
+//               src={card.image}
+//               alt={card.title}
+//               className="w-full h-60 sm:h-52 md:h-52 object-cover cursor-pointer transition-transform duration-700 ease-in-out"
+//               onClick={(e) => { e.stopPropagation(); handleImageClick(index); }}
+//             />
+//             <div className="p-4 sm:p-6 text-center">
+//               <h3 className="text-xl font-semibold text-gray-900 mb-2">{card.title}</h3>
+//               <p className="text-gray-600 text-sm">{card.description}</p>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Fullscreen image */}
+//       {imageOpen && activeCard !== null && (
+//         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 pointer-events-none">
+//           <img
+//             src={cards[activeCard % cards.length].image}
+//             alt={cards[activeCard % cards.length].title}
+//             className="max-h-[90%] max-w-[90%] object-contain pointer-events-auto transition-transform duration-500 scale-105 cursor-pointer"
+//           />
+//         </div>
+//       )}
+
+//       <style>
+//         {`
+//           .scrollbar-hide::-webkit-scrollbar { display: none; }
+//         `}
+//       </style>
+//     </section>
+//   );
+// };
+
+// export default ServiceCards;
+
+// import React, { useRef, useEffect, useState } from "react";
+
+// import Image4 from "../assets/Picture1.png";
+// import Image5 from "../assets/Picture2.png";
+// import Image6 from "../assets/Picture3.png";
+// import Image7 from "../assets/Picture4.png";
+// import Image8 from "../assets/Picture5.png";
+// import Image9 from "../assets/Picture6.png";
+
+// const cards = [
+//   { title: "Bil", description: "Lägg till dina bilar och få full insyn i status, kostnader och lönsamhet – följ besiktningar, tillgänglighet och jämför vinster mellan biltyper och perioder.", image: Image4 },
+//   { title: "Anställda", description: "Administrera alla förare enkelt med full kontroll över lönearter, bilkopplingar, arbetspass och kontaktuppgifter – samt ladda ner lönespecifikationer för valfri period, samlat och strukturerat i ett system.", image: Image5 },
+//   { title: "Anställdas Rapporter", description: "Lägg till dina intäkter och låt systemet automatiskt skapa rapporter, löner och lönespecifikation. Alla siffror förs över till fordonsrapporten och kan sökas fram, laddas ner och sparas i systemet.", image: Image6 },
+//   { title: "Anställdas Rapporter", description: "Följ varje fordons kostnader, intäkter, vinst och marginaler i realtid – siffrorna hämtas automatiskt från anställdas rapporter eller kan läggas in manuellt. Rapporter kan laddas ner för revisorn och sparas i systemet.", image: Image7 },
+//   { title: "Arbetsgivarintyg", description: "Följ varje fordons kostnader, intäkter, vinst och marginaler i realtid – siffrorna hämtas automatiskt från anställdas rapporter eller kan läggas in manuellt. Rapporter kan laddas ner för revisorn och sparas i systemet.", image: Image8 },
+//   { title: "Annonsplattform", description: "Annonsera efter förare för fasta eller tidsbegränsade uppdrag – och hitta förare som aktivt söker jobb. Du kan även lägga upp fordon till försäljning.", image: Image9 },
+// ];
+
+// const ServiceCards = () => {
+//   const scrollRef = useRef(null);
+//   const [activeCard, setActiveCard] = useState(null);
+//   const [imageOpen, setImageOpen] = useState(false);
+//   const slideIntervalRef = useRef(null);
+//   const isHoveredRef = useRef(false);
+
+//   const extendedCards = [...cards, ...cards]; // duplicate for seamless looping
+//   const scrollAmountRef = useRef(0); // store current scroll position
+
+//   // Auto sliding
+//   useEffect(() => {
+//     const scrollContainer = scrollRef.current;
+//     if (!scrollContainer) return;
+
+//     const cardWidth = 340 + 24; // card width + gap
+
+//     const startSliding = () => {
+//       slideIntervalRef.current = setInterval(() => {
+//         if (!isHoveredRef.current && activeCard === null && !imageOpen) {
+//           scrollAmountRef.current += cardWidth;
+
+//           scrollContainer.scrollTo({
+//             left: scrollAmountRef.current,
+//             behavior: "smooth",
+//           });
+
+//           // seamless reset
+//           if (scrollAmountRef.current >= scrollContainer.scrollWidth / 2) {
+//             scrollAmountRef.current = 0;
+//             scrollContainer.scrollTo({ left: 0, behavior: "auto" });
+//           }
+//         }
+//       }, 3000);
+//     };
+
+//     startSliding();
+//     return () => clearInterval(slideIntervalRef.current);
+//   }, [activeCard, imageOpen]);
+
+//   // Close zoom/fullscreen on outside click
+//   useEffect(() => {
+//     const handleClickOutside = () => {
+//       if (imageOpen) setImageOpen(false);
+//       else if (activeCard !== null) setActiveCard(null);
+//     };
+//     document.addEventListener("click", handleClickOutside);
+//     return () => document.removeEventListener("click", handleClickOutside);
+//   }, [activeCard, imageOpen]);
+
+//   const handleCardClick = (index) => {
+//     const scrollContainer = scrollRef.current;
+//     if (scrollContainer) {
+//       const card = scrollContainer.children[index];
+//       const containerCenter = scrollContainer.offsetWidth / 2;
+//       const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+//       scrollContainer.scrollTo({ left: cardCenter - containerCenter, behavior: "smooth" });
+
+//       // Update scrollAmountRef so sliding resumes from this card
+//       scrollAmountRef.current = cardCenter - containerCenter;
+//     }
+//     setActiveCard(activeCard === index ? null : index);
+//   };
+
+//   const handleImageClick = (index) => {
+//     if (activeCard !== index) {
+//       handleCardClick(index);
+//       setTimeout(() => setImageOpen(true), 300);
+//     } else {
+//       setImageOpen(true);
+//     }
+//   };
+
+//   return (
+//     <section className="py-20 px-4 sm:px-6 lg:px-20">
+//       {/* Heading */}
+//       <div className="text-center mb-12">
+//         <h2 className="text-3xl sm:text-4xl font-bold text-[#ffc001] mb-4">
+//           En modern plattform som förenar hela taxibranschen
+//         </h2>
+//         <p className="text-gray-600 text-lg">
+//           Samlar fordon, förare, rapporter och rekrytering i ett och samma digitala system
+//         </p>
+//       </div>
+
+//       {/* Slider */}
+//       <div
+//         ref={scrollRef}
+//         onMouseEnter={() => (isHoveredRef.current = true)}
+//         onMouseLeave={() => (isHoveredRef.current = false)}
+//         className="flex flex-row gap-6 overflow-x-auto snap-x snap-mandatory pb-12 pt-12 scrollbar-hide"
+//         style={{ paddingLeft: "30px", paddingRight: "30px", scrollbarWidth: "none", msOverflowStyle: "none" }}
+//       >
+//         {extendedCards.map((card, index) => (
+//           <div
+//             key={index}
+//             onClick={(e) => { e.stopPropagation(); handleCardClick(index); }}
+//             className={`flex-shrink-0 w-[85vw] sm:w-[340px] bg-white rounded-xl shadow-lg overflow-hidden snap-start cursor-pointer
+//               transform transition-all duration-700 ease-in-out
+//               ${activeCard === index
+//                 ? "sm:scale-125 sm:z-30 sm:shadow-2xl w-[90vw] mx-auto"
+//                 : "hover:scale-105 hover:z-10"
+//               }`}
+//           >
+//             <img
+//               src={card.image}
+//               alt={card.title}
+//               className="w-full h-60 sm:h-56 object-cover cursor-pointer transition-transform duration-700 ease-in-out"
+//               onClick={(e) => { e.stopPropagation(); handleImageClick(index); }}
+//             />
+//             <div className="p-5 sm:p-6 text-center">
+//               <h3 className="text-xl font-semibold text-gray-900 mb-3">{card.title}</h3>
+//               <p className="text-gray-600 text-sm leading-relaxed">{card.description}</p>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Fullscreen image */}
+//       {imageOpen && activeCard !== null && (
+//         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 pointer-events-none">
+//           <img
+//             src={cards[activeCard % cards.length].image}
+//             alt={cards[activeCard % cards.length].title}
+//             className="max-h-[90%] max-w-[90%] object-contain pointer-events-auto transition-transform duration-500 scale-105 cursor-pointer"
+//           />
+//         </div>
+//       )}
+
+//       <style>
+//         {`
+//           .scrollbar-hide::-webkit-scrollbar { display: none; }
+//         `}
+//       </style>
+//     </section>
+//   );
+// };
+
+// export default ServiceCards;
+
+
+import React, { useRef, useEffect, useState } from "react";
+
+import Image4 from "../assets/Picture1.png";
+import Image5 from "../assets/Picture2.png";
+import Image6 from "../assets/Picture3.png";
+import Image7 from "../assets/Picture4.png";
+import Image8 from "../assets/Picture5.png";
+import Image9 from "../assets/Picture6.png";
+
 const cards = [
-  {
-    title: "Driver App",
-    description:
-      "Track your drivers in real-time, manage trip requests, and ensure efficient communication between dispatch and drivers.",
-    image: Image5,
-  },
-  {
-    title: "Admin Dashboard",
-    description:
-      "Control every aspect of your taxi business — from fleet operations to performance insights — in one place.",
-    image: Image4,
-  },
-  {
-    title: "Customer Booking App",
-    description:
-      "Let passengers book rides, track drivers, and pay online with ease. A smooth and reliable user experience guaranteed.",
-    image: Image6,
-  },
+  { title: "Bil", description: "Lägg till dina bilar och få full insyn i status, kostnader och lönsamhet – följ besiktningar, tillgänglighet och jämför vinster mellan biltyper och perioder.", image: Image4 },
+  { title: "Anställda", description: "Administrera alla förare enkelt med full kontroll över lönearter, bilkopplingar, arbetspass och kontaktuppgifter – samt ladda ner lönespecifikationer för valfri period, samlat och strukturerat i ett system.", image: Image5 },
+  { title: "Anställdas Rapporter", description: "Lägg till dina intäkter och låt systemet automatiskt skapa rapporter, löner och lönespecifikation. Alla siffror förs över till fordonsrapporten och kan sökas fram, laddas ner och sparas i systemet.", image: Image6 },
+  { title: "Anställdas Rapporter", description: "Följ varje fordons kostnader, intäkter, vinst och marginaler i realtid – siffrorna hämtas automatiskt från anställdas rapporter eller kan läggas in manuellt. Rapporter kan laddas ner för revisorn och sparas i systemet.", image: Image7 },
+  { title: "Arbetsgivarintyg", description: "Följ varje fordons kostnader, intäkter, vinst och marginaler i realtid – siffrorna hämtas automatiskt från anställdas rapporter eller kan läggas in manuellt. Rapporter kan laddas ner för revisorn och sparas i systemet.", image: Image8 },
+  { title: "Annonsplattform", description: "Annonsera efter förare för fasta eller tidsbegränsade uppdrag – och hitta förare som aktivt söker jobb. Du kan även lägga upp fordon till försäljning.", image: Image9 },
 ];
 
 const ServiceCards = () => {
-  const [clickedIndex, setClickedIndex] = useState(null);
+  const scrollRef = useRef(null);
+  const [activeCard, setActiveCard] = useState(null);
+  const [imageOpen, setImageOpen] = useState(false);
+  const slideIntervalRef = useRef(null);
+  const isHoveredRef = useRef(false);
+
+  const extendedCards = [...cards, ...cards]; // duplicate for seamless looping
+  let scrollAmountRef = useRef(0); // store current scroll position
+
+  // Auto sliding
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    const cardWidth = 360 + 24; // card width + gap
+
+    const startSliding = () => {
+      slideIntervalRef.current = setInterval(() => {
+        if (!isHoveredRef.current && activeCard === null && !imageOpen) {
+          scrollAmountRef.current += cardWidth;
+
+          scrollContainer.scrollTo({
+            left: scrollAmountRef.current,
+            behavior: "smooth",
+          });
+
+          // seamless reset
+          if (scrollAmountRef.current >= scrollContainer.scrollWidth / 2) {
+            scrollAmountRef.current = 0;
+            scrollContainer.scrollTo({ left: 0, behavior: "auto" });
+          }
+        }
+      }, 3000);
+    };
+
+    startSliding();
+    return () => clearInterval(slideIntervalRef.current);
+  }, [activeCard, imageOpen]);
+
+  // Close zoom/fullscreen on outside click
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (imageOpen) setImageOpen(false);
+      else if (activeCard !== null) setActiveCard(null);
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [activeCard, imageOpen]);
+
+  const handleCardClick = (index) => {
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      const card = scrollContainer.children[index];
+      const containerCenter = scrollContainer.offsetWidth / 2;
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      scrollContainer.scrollTo({ left: cardCenter - containerCenter, behavior: "smooth" });
+
+      // Update scrollAmountRef so sliding resumes from this card
+      scrollAmountRef.current = cardCenter - containerCenter;
+    }
+    setActiveCard(activeCard === index ? null : index);
+  };
+
+  const handleImageClick = (index) => {
+    if (activeCard !== index) {
+      handleCardClick(index);
+      setTimeout(() => setImageOpen(true), 300);
+    } else {
+      setImageOpen(true);
+    }
+  };
 
   return (
-    <section className="py-20 bg-white px-6 sm:px-10 lg:px-20">
-      <div className="max-w-7xl mx-auto text-center">
+    <section className="py-20 px-4 sm:px-6 lg:px-20">
+      {/* Heading */}
+      <div className="text-center mb-12">
         <h2 className="text-3xl sm:text-4xl font-bold text-[#ffc001] mb-4">
           En modern plattform som förenar hela taxibranschen
         </h2>
-        <p className="text-gray-600 text-lg mb-12">
-         och samla fordon, förare, rapporter, och rekrytering i ett och samma digitala system.
+        <p className="text-gray-600 text-lg">
+          Samlar fordon, förare, rapporter och rekrytering i ett och samma digitala system
         </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {cards.map((card, index) => (
-            <motion.div
-              key={index}
-              onClick={() => setClickedIndex(index)}
-              animate={{
-                scale: clickedIndex === index ? 0.95 : 1,
-              }}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden"
-            >
-              <img
-                src={card.image}
-                alt={card.title}
-                className="w-full h-52 object-cover"
-              />
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {card.title}
-                </h3>
-                <p className="text-gray-600 text-sm">{card.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
       </div>
+
+      {/* Slider */}
+      <div
+        ref={scrollRef}
+        onMouseEnter={() => (isHoveredRef.current = true)}
+        onMouseLeave={() => (isHoveredRef.current = false)}
+        className="flex flex-row gap-6 overflow-x-auto snap-x snap-mandatory pb-12 pt-12 scrollbar-hide"
+        style={{ paddingLeft: "30px", paddingRight: "30px", scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {extendedCards.map((card, index) => (
+          <div
+            key={index}
+            onClick={(e) => { e.stopPropagation(); handleCardClick(index); }}
+            className={`flex-shrink-0 w-[85vw] sm:w-[360px] bg-white rounded-xl shadow-lg overflow-hidden snap-start cursor-pointer
+              transform transition-all duration-700 ease-in-out
+              ${activeCard === index
+                ? "sm:scale-125 sm:z-30 sm:shadow-2xl w-[90vw] mx-auto"
+                : "hover:scale-105 hover:z-10"
+              }`}
+          >
+            <img
+              src={card.image}
+              alt={card.title}
+              className="w-full h-60 sm:h-56 object-cover cursor-pointer transition-transform duration-700 ease-in-out"
+              onClick={(e) => { e.stopPropagation(); handleImageClick(index); }}
+            />
+            <div className="p-5 sm:p-6 text-center">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{card.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                {card.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Fullscreen image */}
+      {imageOpen && activeCard !== null && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 pointer-events-none">
+          <img
+            src={cards[activeCard % cards.length].image}
+            alt={cards[activeCard % cards.length].title}
+            className="max-h-[90%] max-w-[90%] object-contain pointer-events-auto transition-transform duration-500 scale-105 cursor-pointer"
+          />
+        </div>
+      )}
+
+      <style>
+        {`
+          .scrollbar-hide::-webkit-scrollbar { display: none; }
+        `}
+      </style>
     </section>
   );
 };
 
 export default ServiceCards;
-
-
-
-
-// import React, { useState, useEffect, useRef } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-
-// import Image4 from "../assets/1.png";
-// import Image5 from "../assets/2.png";
-// import Image6 from "../assets/2.png";
-
-// const cards = [
-//   {
-//     title: "Driver App",
-//     description:
-//       "Track your drivers in real-time, manage trip requests, and ensure efficient communication between dispatch and drivers.",
-//     image: Image5,
-//   },
-//   {
-//     title: "Admin Dashboard",
-//     description:
-//       "Control every aspect of your taxi business — from fleet operations to performance insights — in one place.",
-//     image: Image4,
-//   },
-//   {
-//     title: "Customer Booking App",
-//     description:
-//       "Let passengers book rides, track drivers, and pay online with ease. A smooth and reliable user experience guaranteed.",
-//     image: Image6,
-//   },
-// ];
-
-// const slideDuration = 4000; // 4 seconds
-
-// const ServiceCards = () => {
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const [direction, setDirection] = useState(1);
-//   const timeoutRef = useRef(null);
-
-//   useEffect(() => {
-//     timeoutRef.current = setTimeout(() => {
-//       setDirection(1);
-//       setCurrentIndex((prev) => (prev + 1) % cards.length);
-//     }, slideDuration);
-
-//     return () => clearTimeout(timeoutRef.current);
-//   }, [currentIndex]);
-
-//   const variants = {
-//     enter: (direction) => ({
-//       x: direction > 0 ? "100%" : "-100%",
-//       opacity: 0,
-//       position: "absolute",
-//       top: 0,
-//       left: 0,
-//       width: "100%",
-//       height: "100%",
-//     }),
-//     center: {
-//       x: 0,
-//       opacity: 1,
-//       position: "relative",
-//     },
-//     exit: (direction) => ({
-//       x: direction < 0 ? "100%" : "-100%",
-//       opacity: 0,
-//       position: "absolute",
-//       top: 0,
-//       left: 0,
-//       width: "100%",
-//       height: "100%",
-//     }),
-//   };
-
-//   return (
-//     <section className="py-16 bg-white px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
-//       <div className="text-center max-w-4xl mx-auto mb-10 px-4 sm:px-6 lg:px-0">
-//         <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-//           A System Designed for Every User
-//         </h2>
-//         <p className="text-gray-600 text-base sm:text-lg">
-//           Our taxi system includes everything your business needs to operate smoothly.
-//         </p>
-//       </div>
-
-//       <div
-//         className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-xl shadow-lg"
-//         style={{ aspectRatio: "16 / 9", maxHeight: "450px" }}
-//       >
-//         <AnimatePresence custom={direction} mode="wait">
-//           <motion.img
-//             key={cards[currentIndex].image}
-//             src={cards[currentIndex].image}
-//             alt={cards[currentIndex].title}
-//             custom={direction}
-//             variants={variants}
-//             initial="enter"
-//             animate="center"
-//             exit="exit"
-//             transition={{ type: "tween", duration: 0.8 }}
-//             className="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
-//           />
-//         </AnimatePresence>
-//       </div>
-
-//       <div className="max-w-4xl mx-auto mt-8 text-center px-4 sm:px-6 lg:px-0">
-//         <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">
-//           {cards[currentIndex].title}
-//         </h3>
-//         <p className="text-gray-600 text-sm sm:text-base">{cards[currentIndex].description}</p>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default ServiceCards;
-
-
-// import React, { useState, useEffect, useRef } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-
-// import Image4 from "../assets/1.png";
-// import Image5 from "../assets/2.png";
-// import Image6 from "../assets/2.png";
-
-// const cards = [
-//   {
-//     title: "Driver App",
-//     description:
-//       "Track your drivers in real-time, manage trip requests, and ensure efficient communication between dispatch and drivers.",
-//     image: Image5,
-//   },
-//   {
-//     title: "Admin Dashboard",
-//     description:
-//       "Control every aspect of your taxi business — from fleet operations to performance insights — in one place.",
-//     image: Image4,
-//   },
-//   {
-//     title: "Customer Booking App",
-//     description:
-//       "Let passengers book rides, track drivers, and pay online with ease. A smooth and reliable user experience guaranteed.",
-//     image: Image6,
-//   },
-// ];
-
-// const slideDuration = 4000; // 4 seconds
-
-// const ServiceCards = () => {
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const [direction, setDirection] = useState(1);
-//   const timeoutRef = useRef(null);
-
-//   useEffect(() => {
-//     timeoutRef.current = setTimeout(() => {
-//       setDirection(1);
-//       setCurrentIndex((prev) => (prev + 1) % cards.length);
-//     }, slideDuration);
-
-//     return () => clearTimeout(timeoutRef.current);
-//   }, [currentIndex]);
-
-//   const variants = {
-//     enter: (direction) => ({
-//       x: direction > 0 ? "100%" : "-100%",
-//       opacity: 0,
-//       position: "absolute",
-//       top: 0,
-//       left: 0,
-//       width: "100%",
-//       height: "100%",
-//     }),
-//     center: {
-//       x: 0,
-//       opacity: 1,
-//       position: "relative",
-//     },
-//     exit: (direction) => ({
-//       x: direction < 0 ? "100%" : "-100%",
-//       opacity: 0,
-//       position: "absolute",
-//       top: 0,
-//       left: 0,
-//       width: "100%",
-//       height: "100%",
-//     }),
-//   };
-
-//   return (
-//     <section className="py-16 bg-white px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
-//       <div className="text-center max-w-4xl mx-auto mb-10 px-4 sm:px-6 lg:px-0">
-//         <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-//           A System Designed for Every User
-//         </h2>
-//         <p className="text-gray-600 text-base sm:text-lg">
-//           Our taxi system includes everything your business needs to operate smoothly.
-//         </p>
-//       </div>
-
-//       <div
-//         className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-xl shadow-lg"
-//         style={{ aspectRatio: "16 / 9", maxHeight: "450px" }}
-//       >
-//         <AnimatePresence custom={direction} mode="wait">
-//           <motion.img
-//             key={cards[currentIndex].image}
-//             src={cards[currentIndex].image}
-//             alt={cards[currentIndex].title}
-//             custom={direction}
-//             variants={variants}
-//             initial="enter"
-//             animate="center"
-//             exit="exit"
-//             transition={{ type: "tween", duration: 0.8 }}
-//             className="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
-//           />
-//         </AnimatePresence>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default ServiceCards;
-

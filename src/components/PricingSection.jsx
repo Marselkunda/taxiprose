@@ -6,7 +6,7 @@ const [selectedPlan, setSelectedPlan] = useState(null);
   const plans = [
     {
       name: "TaxiPro S",
-      price: "0 kr/mån",
+      price: "0 / Månad",
       description: "För enskilda förare och mindre åkerier",
       features: [
         "Upp till 1 bil",

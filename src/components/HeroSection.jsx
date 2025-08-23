@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import BannerImage from "../assets/2.png";
+import BannerImage from "../assets/section1.png";
 
 const HeroSection = ({ scrollToPricing, scrollToServices }) => {
   return (
@@ -13,7 +13,7 @@ const HeroSection = ({ scrollToPricing, scrollToServices }) => {
           transition={{ duration: 0.8 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-snug sm:leading-tight"
         >
-          Allt för din taxiverksamhet{" "}
+          Allt för din taxiverksamhet{" "} <br></br>
           <span className="text-[#ffc001]">i en digital plattform</span>
         </motion.h1>
 

@@ -69,14 +69,14 @@ function Navbar({ onSignUpClick }) {
               }`
             }
           >
-            Sign in
+            Logga in
           </NavLink>
 
           <button
             onClick={handleSignUpClick}
             className="bg-[#ffc001] text-white px-4 py-2 rounded-lg shadow hover:opacity-90 transition"
           >
-            Register
+            Registrera
           </button>
         </div>
 
@@ -97,21 +97,21 @@ function Navbar({ onSignUpClick }) {
               onClick={closeMenu}
               className={({ isActive }) => `${linkBaseClass} ${isActive ? activeClass : inactiveClass}`}
             >
-              Home
+              Hem
             </NavLink>
             <NavLink
               to="/AboutUs"
               onClick={closeMenu}
               className={({ isActive }) => `${linkBaseClass} ${isActive ? activeClass : inactiveClass}`}
             >
-              About
+              Om oss
             </NavLink>
             <NavLink
               to="/Services"
               onClick={closeMenu}
               className={({ isActive }) => `${linkBaseClass} ${isActive ? activeClass : inactiveClass}`}
             >
-              Services
+              Tjänster
             </NavLink>
             <NavLink
               to="/signin"
@@ -122,14 +122,14 @@ function Navbar({ onSignUpClick }) {
                 }`
               }
             >
-              Sign in
+              Logga in
             </NavLink>
 
             <button
               onClick={handleSignUpClick}
               className="bg-[#ffc001] text-white px-4 py-2 rounded-lg shadow hover:opacity-90 transition"
             >
-              Sign up
+              Registrera
             </button>
           </nav>
         </aside>

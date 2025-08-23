@@ -17,7 +17,7 @@ const Footer = () => {
 
           {/* Brand & Description */}
           <div>
-            <h2 className="text-3xl font-bold text-gray-800">TaxiPro</h2>
+            <h2 className="text-3xl font-bold text-[#ffc001]">TaxiPro</h2>
             <p className="mt-3 max-w-xs text-gray-700">
               Smart hantering av taxiverksamhet<br />
               enkelt och effektivt. Utvecklad för åkerier och förare i Sverige.
@@ -37,7 +37,7 @@ const Footer = () => {
 
           {/* Products Column */}
           <div>
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Produkter</h3>
+            <h3 className="text-xl font-semibold mb-3 text-[#ffc001]">Produkter</h3>
             <ul className="space-y-2">
               <li><Link to="#" className="text-gray-600 hover:text-[#ffc001] transition">Åkarie-webbapp</Link></li>
               <li><Link to="#" className="text-gray-600 hover:text-[#ffc001] transition">Förar-mobilapp</Link></li>
@@ -47,7 +47,7 @@ const Footer = () => {
 
           {/* Quick Links Column */}
           <div>
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Snabblänkar</h3>
+            <h3 className="text-xl font-semibold mb-3 text-[#ffc001]">Snabblänkar</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-gray-600 hover:text-[#ffc001] transition">
@@ -78,7 +78,7 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Kontakta oss</h3>
+            <h3 className="text-xl font-semibold mb-3 text-[#ffc001]">Kontakta oss</h3>
             <ul className="space-y-2 text-gray-700">
               {/* <li>Sweden</li> */}
               {/* <li>info@taxipro.se</li> */}
