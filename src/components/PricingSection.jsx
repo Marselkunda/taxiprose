@@ -102,7 +102,7 @@ const [selectedPlan, setSelectedPlan] = useState(null);
                     : "bg-[#fff4d4] text-[#ffc001] hover:bg-[#ffe185]"
                 }`}
               >
-                Register Now
+                Registrera
               </button>
             </div>
           );

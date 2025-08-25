@@ -402,6 +402,8 @@ const RegistrationForm = () => {
   const [error, setError] = useState("");
   const [termsError, setTermsError] = useState("");
   const messageRef = useRef(null);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const tooltipRef = useRef(null);
 
   // Save form data whenever it changes
   useEffect(() => {
@@ -413,6 +415,18 @@ const RegistrationForm = () => {
       messageRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [error, submitted]);
+
+  useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+      setTooltipOpen(false);
+    }
+  };
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+
+  
 
   // ✅ Validation helpers
   const isValidText = (value) => /^[a-zA-Z\s'-]*$/.test(value); // For firstName, surname, city
@@ -535,11 +549,41 @@ const RegistrationForm = () => {
         className="w-full max-w-[1600px] bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl p-6 sm:p-10 border"
         style={{ borderColor: "#ffc001" }}
       >
-        <h1 className="text-3xl font-bold text-center mb-2" style={{ color: "#ffc001" }}>
+        <h1
+          className="text-3xl font-bold text-center mb-2"
+          style={{ color: "#ffc001" }}
+        >
           Registrera ditt åkeri
         </h1>
-        <p className="text-center text-gray-600 mb-6 text-sm sm:text-base">
+        {/* <p className="text-center text-gray-600 mb-6 text-sm sm:text-base">
           Få full tillgång till TaxiPros webbapp för administration av ditt åkeri
+        </p> */}
+
+        <p className="text-center text-gray-600 mb-6 text-sm sm:text-base flex justify-center items-center gap-2">
+          Få full tillgång till TaxiPros webbapp för administration av ditt
+          åkeri
+          <span
+            ref={tooltipRef}
+            className="cursor-pointer text-yellow-600 font-bold select-none relative"
+            onClick={() => setTooltipOpen(!tooltipOpen)}
+            onMouseEnter={() => setTooltipOpen(true)}
+            onMouseLeave={() => setTooltipOpen(false)}
+          >
+            !
+            {tooltipOpen && (
+              <div className="absolute z-50 top-6 -translate-x-1/2 left-1/2 w-80 p-4 bg-white rounded-lg shadow-lg border border-gray-200 text-sm text-red-600 animate-fade-in">
+                <p className="font-semibold mb-2">
+                  Testa tjänsten gratis i tre (3) månader
+                </p>
+                <p className="mb-1">
+                  Ingen bindingstid – om skriftlig uppsägning inte sker senast
+                  en (1) månad före nästa betalningsperiod, förlängs avtalet
+                  automatiskt.
+                </p>
+                <p>Kunden faktureras enligt vald tjänst och betalningsplan.</p>
+              </div>
+            )}
+          </span>
         </p>
 
         {error && (
@@ -682,9 +726,7 @@ const RegistrationForm = () => {
                 </Link>
               </span>
             </label>
-            {termsError && (
-              <p className="text-sm text-red-600">{termsError}</p>
-            )}
+            {termsError && <p className="text-sm text-red-600">{termsError}</p>}
           </div>
 
           {/* Newsletter checkbox */}
@@ -702,13 +744,16 @@ const RegistrationForm = () => {
                 </svg>
               </span>
               <span className="ml-3">
-                Jag vill ta emot nyhetsbrev från Taxi Pro i Sverige AB och kan när som helst avregistrera mig via länk i utskicket eller genom att kontakta{" "}
+                Jag vill ta emot nyhetsbrev från Taxi Pro i Sverige AB och kan
+                när som helst avregistrera mig via länk i utskicket eller genom
+                att kontakta{" "}
                 <a
                   href="mailto:info@taxipro.se"
-                  className="text-blue-600 underline hover:text-blue-800"
+                  className="text-[#ffc001] hover:underline"
                 >
                   info@taxipro.se
-                </a>.
+                </a>
+                .
               </span>
             </label>
           </div>
@@ -736,4 +781,5 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
+
 
