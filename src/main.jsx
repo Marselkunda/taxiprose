@@ -13,4 +13,3 @@ createRoot(document.getElementById('root')).render(
 );
 
 
-// basename="/taxipro.se
